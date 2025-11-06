@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en"> <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestic AI 🤖 | Sign Language Revolution</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* [CSS TETAP SAMA SEPERTI ASLINYA] */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --primary-glow: rgba(37, 117, 252, 0.7);
+            --secondary-color: #00ff88;
+            --secondary-glow: rgba(0, 255, 136, 0.6);
+            --accent-pink: #ff006e;
+            --accent-yellow: #ffbe0b;
+            --background-color: #0a0a1a;
+            --card-color: #1a1a2e;
+            --text-dark: #f0f0f0;
+            --text-light: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* === ANIMATED BACKGROUND === */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(135deg, #00ff88, #00cc70);
+            bottom: -100px;
+            right: -100px;
+            animation-delay: 5s;
+        }
+
+        .shape-3 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #ff006e, #ff4d94);
+            top: 50%;
+            right: 10%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, 50px) rotate(90deg); }
+            50% { transform: translate(-30px, 80px) rotate(180deg); }
+            75% { transform: translate(70px, -40px) rotate(270deg); }
+        }
+
+        /* === HERO SECTION === */
+        .hero-container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .logo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ai-badge {
+            background: var(--primary-gradient);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .title-wrapper {
+            margin-bottom: 30px;
+        }
+
+        .title-gradient {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            line-height: 1.1;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            animation: scaleIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .title-accent {
+            display: block;
+            font-size: clamp(2rem, 6vw, 5rem);
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-pink), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
+            background-size: 200% auto;
+            padding-bottom: 5px;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 0 auto 50px;
+            font-weight: 300;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* === CTA BUTTONS === */
+        .cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .neon-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px 45px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 0 30px var(--primary-glow), 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neon-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .neon-button:hover::before {
+            left: 100%;
+        }
+
+        .neon-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 50px var(--primary-glow), 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .neon-button-secondary {
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: none;
+        }
+
+        .neon-button-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 30px var(--secondary-glow);
+        }
+
+        /* === STATS SECTION === */
+        .stats-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            margin-top: 80px;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .stat-item {
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* === FEATURES SECTION === */
+        .features-section {
+            position: relative;
+            z-index: 1;
+            padding: 100px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-subtitle {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--secondary-color);
+            border-radius: 30px;
+            color: var(--secondary-color);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9), rgba(42, 42, 78, 0.6));
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--primary-gradient);
+            border-radius: 30px;
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: -1;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(37, 117, 252, 0.3);
+        }
+
+        .feature-card:nth-child(2) .feature-icon {
+            background: linear-gradient(135deg, var(--secondary-color), #00cc70);
+            box-shadow: 0 10px 30px var(--secondary-glow);
+        }
+
+        .feature-card:nth-child(3) .feature-icon {
+            background: linear-gradient(135deg, var(--accent-pink), #ff4d94);
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.3);
+        }
+
+        .feature-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .feature-description {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+        }
+
+        /* === HOW IT WORKS === */
+        .how-it-works {
+            position: relative;
+            z-index: 1;
+            padding: 100px 20px;
+            background: linear-gradient(180deg, transparent, rgba(26, 26, 46, 0.5), transparent);
+        }
+
+        .steps-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .step-card {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--text-light);
+            margin: 0 auto 25px;
+            box-shadow: 0 10px 30px var(--primary-glow);
+            position: relative;
+        }
+
+        .step-card:nth-child(2) .step-number {
+            background: linear-gradient(135deg, var(--secondary-color), #00cc70);
+            box-shadow: 0 10px 30px var(--secondary-glow);
+        }
+
+        .step-card:nth-child(3) .step-number {
+            background: linear-gradient(135deg, var(--accent-pink), #ff4d94);
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.3);
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .step-description {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+        }
+
+        /* === CTA SECTION === */
+        .cta-section {
+            position: relative;
+            z-index: 1;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .cta-card {
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(106, 17, 203, 0.2), rgba(37, 117, 252, 0.2));
+            border-radius: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            padding: 60px 40px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .cta-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* === FOOTER === */
+        .footer {
+            position: relative;
+            z-index: 1;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .footer-text strong {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .cta-group {
+                flex-direction: column;
+                width: 100%;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .neon-button {
+                width: 100%;
+            }
+
+            .stats-section {
+                gap: 30px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-container {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-card {
+                padding: 40px 25px;
+            }
+        }
+
+        /* === SCROLL ANIMATIONS === */
+        [data-aos] {
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+    </div>
+
+    <section class="hero-container">
+        <div class="logo-badge" data-aos="fade-down" data-aos-duration="600">
+            <span class="ai-badge">AI Powered</span>
+            Cutting-edge Sign Recognition Technology
+        </div>
+
+        <div class="title-wrapper">
+            <h1 class="title-gradient" data-aos="zoom-in" data-aos-duration="800">
+                Gestic AI
+                <span class="title-accent">Speaking Without Words</span>
+            </h1>
+        </div>
+
+        <p class="subtitle" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+            Revolutionizing sign language learning with the latest AI technology.
+            Interactive, fun, and easy to understand for everyone.
+        </p>
+
+        <div class="cta-group">
+            <a href="story.html" class="neon-button" data-aos="fade-up" data-aos-delay="400">
+                🚀 Start Adventure
+            </a>
+            <a href="#features" class="neon-button neon-button-secondary" data-aos="fade-up" data-aos-delay="500">
+                📖 Learn More
+            </a>
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="600">
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Signs Available</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="700">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">AI Accuracy</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="800">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Free Access</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features-section">
+        <div class="section-header" data-aos="fade-up">
+            <div class="section-subtitle">✨ Key Features</div>
+            <h2 class="section-title">Why Gestic AI?</h2>
+            <p class="section-description">
+                The most modern and interactive sign language learning platform with leading AI technology
+            </p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-icon">🎯</div>
+                <h3 class="feature-title">Interactive Learning</h3>
+                <p class="feature-description">
+                    Learn through engaging and interactive stories. Every choice you make shapes a unique and fun adventure.
+                </p>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-icon">🤖</div>
+                <h3 class="feature-title">Real-Time AI</h3>
+                <p class="feature-description">
+                    Real-time hand gesture detection using advanced machine learning technology with high accuracy.
+                </p>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-icon">🎨</div>
+                <h3 class="feature-title">Modern Design</h3>
+                <p class="feature-description">
+                    An eye-catching interface with smooth animations and clear visual feedback for an optimal learning experience.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="section-header" data-aos="fade-up">
+            <div class="section-subtitle">⚡ How It Works</div>
+            <h2 class="section-title">Easy in 3 Steps</h2>
+        </div>
+
+        <div class="steps-container">
+            <div class="step-card" data-aos="fade-right" data-aos-delay="100">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Choose a Story</h3>
+                <p class="step-description">
+                    Start an interactive adventure with a branching and engaging storyline
+                </p>
+            </div>
+
+            <div class="step-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Make a Sign</h3>
+                <p class="step-description">
+                    Use your webcam to respond to choices with the corresponding sign language
+                </p>
+            </div>
+
+            <div class="step-card" data-aos="fade-left" data-aos-delay="300">
+                <div class="step-number">3</div>
+                <h3 class="step-title">AI Detects</h3>
+                <p class="step-description">
+                    The AI model recognizes your sign and continues the story automatically
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-card" data-aos="zoom-in">
+            <h2 class="cta-title">Ready to Start Your Adventure?</h2>
+            <p class="cta-description">
+                Join thousands of users who have learned sign language in a fun way
+            </p>
+            <a href="story.html" class="neon-button">
+                🎯 Start Now - It's Free!
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p class="footer-text">
+            Made with ❤️ by <strong>Gestic AI Team</strong> © 2025
+        </p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: false,
+            mirror: true
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add parallax effect to floating shapes
+        document.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.floating-shape');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+
+            shapes.forEach((shape, index) => {
+                const speed = (index + 1) * 20;
+                const x = mouseX * speed;
+                const y = mouseY * speed;
+                shape.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestic AI 🤖 | Start Story</title>
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="story.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script src="https://embed.signasl.org/widgets.js" charset="utf-8"></script>
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+    </div>
+
+    <div class="main-wrapper">
+        <a href="index.html" class="neon-button back-button">← Back to Home</a>
+        
+        <div class="page-header" data-aos="fade-down">
+            <h1 class="page-title">🎮 Interactive Adventure</h1>
+        </div>
+
+        <p class="subtitle" data-aos="fade-up" data-aos-delay="100">
+            Point your hand gesture at the webcam to see real-time predictions, then click "Start Story" to begin the adventure!
+        </p>
+
+        <button type="button" class="neon-button" onclick="openStoryModal()" id="startButton" data-aos="zoom-in" data-aos-delay="200">
+            🚀 START STORY
+        </button>
+
+        <div class="prediction-main-area" data-aos="fade-up" data-aos-delay="300">
+            <div id="webcam-container-main">
+                <div class="webcam-guide-overlay"></div>
+                <div class="loading" id="loading-text-main">
+                    <div class="loading-spinner"></div>
+                    <div>Loading AI model...</div>
+                </div>
+            </div>
+            <div id="label-container-main"></div>
+        </div>
+
+        <p class="helper-text" data-aos="fade-up" data-aos-delay="400">
+            💡 <span>Tip: Ensure good lighting and your hand is clearly visible in the camera</span>
+        </p>
+    </div>
+
+    <div id="story-modal" role="dialog" aria-labelledby="modal-story-text">
+        <div class="modal-content">
+            <span class="modal-close-btn" onclick="closeModal()" aria-label="Close">&times;</span>
+            <h2 id="modal-story-text">Loading Story...</h2>
+            <div id="status-container"></div>
+            <div id="modal-main-area">
+                <div id="modal-choices-container"></div>
+                <div id="modal-webcam-container-story">
+                    <div class="webcam-guide-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script src="story.js"></script>
+</body>
+</html>
